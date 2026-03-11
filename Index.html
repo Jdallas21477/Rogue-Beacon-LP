@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rogue Beacon | Revenue Clarity Engagement</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Official Brand Palette */
+            --rogue-orange: #FF5000;
+            --rogue-blue: #0071CE;
+            --charcoal: #1E2834;
+            --white: #FFFFFF;
+            --off-white: #F4F4F4;
+            --light-gray: #B8BBBF;
+            
+            /* Layout & Motion */
+            --container-max: 1100px;
+            --transition-speed: 0.5s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--charcoal);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, .display-serif {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: var(--light-gray);
+        }
+
+        .text-orange { color: var(--rogue-orange); }
+        .text-charcoal { color: var(--charcoal); }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 24px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(30, 40, 52, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+        }
+
+        .wordmark {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--rogue-orange);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 36px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--rogue-orange);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: #e64800;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 80, 0, 0.2);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 220px 24px 120px;
+            text-align: center;
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .beacon-glow {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vw;
+            background: radial-gradient(circle at center, rgba(255, 80, 0, 0.18) 0%, rgba(30, 40, 52, 0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 9vw, 6rem);
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section Layouts */
+        section {
+            padding: 100px 24px;
+        }
+
+        .section-dark { background-color: var(--charcoal); }
+        .section-light { background-color: var(--off-white); }
+
+        /* Spotlight Graphic */
+        .graphic-card-spotlight {
+            background: #161e27;
+            border-radius: 4px;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .spotlight-viz {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(from 160deg at 50% 0%, rgba(255, 80, 0, 0.15) 0deg, transparent 25deg, transparent 335deg, rgba(255, 80, 0, 0.15) 360deg);
+            z-index: 0;
+        }
+
+        .graphic-card-spotlight h3 {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            z-index: 1;
+        }
+
+        .graphic-card-spotlight p {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--rogue-orange);
+            font-weight: 800;
+            z-index: 1;
+        }
+
+        /* The Moment Section */
+        .moment-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .moment-content h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: 32px;
+            color: var(--charcoal);
+        }
+
+        .square-graphic {
+            width: 400px;
+            height: 400px;
+            background: var(--white);
+            border: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+        }
+
+        .square-graphic h4 {
+            font-size: 2rem;
+            color: var(--charcoal);
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .square-graphic p {
+            color: var(--rogue-orange);
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Bullet Styles */
+        .bullet-list {
+            list-style: none;
+            margin: 24px 0;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 36px;
+            margin-bottom: 18px;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .bullet-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 14px;
+            height: 2px;
+            background-color: var(--rogue-orange);
+        }
+
+        /* What Beacon Does */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 50px;
+        }
+
+        /* Executive Question Card */
+        .executive-card-container {
+            padding: 0 24px;
+            background-color: var(--rogue-orange);
+        }
+
+        .executive-card {
+            background: var(--charcoal);
+            border-radius: 4px;
+            padding: 60px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .executive-card h3 {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        /* Who This Is For */
+        .clarity-header {
+            font-size: clamp(3.5rem, 8vw, 5.5rem);
+            margin-bottom: 60px;
+        }
+
+        .criteria-list li {
+            font-size: 1.75rem;
+            padding-left: 48px;
+            margin-bottom: 24px;
+        }
+
+        .criteria-list li::before {
+            top: 18px;
+            width: 20px;
+            height: 3px;
+        }
+
+        /* Disclaimer Box */
+        .disclaimer-box {
+            background: var(--white);
+            color: var(--charcoal);
+            padding: 70px;
+            margin: 80px 0;
+            border-left: 10px solid var(--rogue-orange);
+        }
+
+        .disclaimer-box p {
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--charcoal);
+            font-family: 'DM Serif Display', serif;
+        }
+
+        /* AI Tool */
+        .ai-tool {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255, 80, 0, 0.2);
+            padding: 50px;
+            margin-top: 40px;
+        }
+
+        .ai-input {
+            width: 100%;
+            background: #2a3644;
+            border: 1px solid #3f4e5f;
+            color: white;
+            padding: 24px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            border-radius: 2px;
+        }
+
+        /* Utilities */
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        footer {
+            padding: 60px 24px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 1024px) {
+            .moment-grid { grid-template-columns: 1fr; gap: 40px; }
+            .square-graphic { width: 100%; height: auto; aspect-ratio: 1/1; }
+            .capabilities-grid { grid-template-columns: 1fr; }
+            .disclaimer-box { padding: 40px; }
+            .disclaimer-box p { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="container">
+            <a href="#" class="wordmark">Rogue Beacon</a>
+            <a href="#contact" class="btn btn-primary">Let's Talk</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="beacon-glow"></div>
+        <div class="container reveal">
+            <h1>You Don't Need More Activity. <br><span class="text-orange">You Need a Beacon.</span></h1>
+            <p style="font-size: 1.6rem; margin-bottom: 40px; color: white; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.4;">Rogue Beacon shines a hard light on your revenue reality. In 60 days, you'll know where to go, what to do, and where to look to find your next $1–3 million.</p>
+            <a href="#ai-diagnostic" class="btn btn-primary">Illuminate My Revenue</a>
+        </div>
+    </section>
+
+    <!-- Graphic 1: Spotlight (Tight spacing below) -->
+    <section class="section-dark" style="padding: 20px 24px 0;">
+        <div class="container">
+            <div class="graphic-card-spotlight reveal">
+                <div class="spotlight-viz"></div>
+                <h3>What's hiding in your revenue?</h3>
+                <p>Rogue Beacon separates direction from distraction.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: The Moment (Contrast Layout) -->
+    <section class="section-light" style="padding-top: 60px;">
+        <div class="container">
+            <div class="moment-grid reveal">
+                <div class="moment-content">
+                    <h2 class="text-charcoal">Everything feels busy, <br>but <span class="text-orange">nothing feels certain.</span></h2>
+                    <p class="text-charcoal" style="margin-bottom: 24px; font-size: 1.3rem;">Revenue and growth rarely stall because teams aren't trying. It stalls because leadership energy diffuses instead of concentrates.</p>
+                    <ul class="bullet-list text-charcoal">
+                        <li>Spend spreads across too many initiatives</li>
+                        <li>Growth looks healthy, but scales expensively</li>
+                        <li>Sales friction gets misdiagnosed</li>
+                    </ul>
+                </div>
+
+                <div class="square-graphic">
+                    <svg width="180" height="100" viewBox="0 0 180 100">
+                        <line x1="20" y1="50" x2="140" y2="10" stroke="#B8BBBF" stroke-width="2" marker-end="url(#arrowhead-gray)"/>
+                        <line x1="20" y1="50" x2="140" y2="90" stroke="#B8BBBF" stroke-width="2" marker-end="url(#arrowhead-gray)"/>
+                        <line x1="20" y1="50" x2="170" y2="50" stroke="#FF5000" stroke-width="6" marker-end="url(#arrowhead-orange)"/>
+                        <defs>
+                            <marker id="arrowhead-gray" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#B8BBBF" /></marker>
+                            <marker id="arrowhead-orange" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#FF5000" /></marker>
+                        </defs>
+                    </svg>
+                    <h4>Busy does not equal scaling.</h4>
+                    <p>Activity is not leverage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Capabilities -->
+    <section class="section-dark" style="padding-bottom: 60px;">
+        <div class="container reveal">
+            <h2 style="font-size: 4rem;">Beacon Illuminates Revenue Reality</h2>
+            <div class="capabilities-grid">
+                <div>
+                    <h4 class="text-orange" style="text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.15em; margin-bottom: 24px; font-family:'DM Sans'; font-weight:800;">What if you could:</h4>
+                    <ul class="bullet-list">
+                        <li>Map where revenue truly originates</li>
+                        <li>Separate profitable growth from expensive growth</li>
+                        <li>Expose friction inside your sales motion</li>
+                        <li>Identify hidden constraint points</li>
+                        <li>Define 3–5 executive decisions that unlock momentum</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-orange" style="text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.15em; margin-bottom: 24px; font-family:'DM Sans'; font-weight:800;">What you walk away with:</h4>
+                    <ul class="bullet-list">
+                        <li>A clear revenue map</li>
+                        <li>A stop/start/double-down framework</li>
+                        <li>An executive brief you can defend in the boardroom</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Graphic 3: Executive Card -->
+    <section class="executive-card-container">
+        <div class="executive-card reveal">
+            <h3>If nothing changes this year, what happens?</h3>
+            <p style="font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--rogue-orange); font-weight: 800;">To identify the right changes to make.</p>
+        </div>
+    </section>
+
+    <!-- Section 4: Who This Is For -->
+    <section class="section-dark" style="padding-top: 120px;">
+        <div class="container reveal">
+            <h2 class="clarity-header">Beacon is built for leaders who want <span class="text-orange">Clarity</span></h2>
+            
+            <ul class="bullet-list criteria-list" style="margin-bottom: 80px;">
+                <li>Founder/CEO-led B2B companies</li>
+                <li>$5–50M revenue</li>
+                <li>Complex sale cycle</li>
+                <li>Leadership teams feeling the plateau</li>
+            </ul>
+
+            <div class="disclaimer-box">
+                <p>If you're looking for more tactics, more content, or more activity with a rubber stamp validation — this isn't it.</p>
+            </div>
+
+            <div style="margin-top: 60px;">
+                <h3 style="font-size: 2.5rem; margin-bottom: 24px;">Beacon is for leaders who want to know:</h3>
+                <ul class="bullet-list">
+                    <li>What deserves funding</li>
+                    <li>What deserves protection</li>
+                    <li>And what deserves to stop</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Analyzer (Tight top) -->
+    <section class="section-dark" id="ai-diagnostic" style="padding-top: 40px;">
+        <div class="container reveal">
+            <div class="ai-tool">
+                <h3 style="font-size: 2rem; margin-bottom: 20px;">✨ Instant Revenue Reality Check</h3>
+                <textarea id="ai-input-fog" class="ai-input" placeholder="Describe your current plateau (e.g., We're at $15M, spending more on media, but lead quality is dropping...)"></textarea>
+                <button onclick="analyzeFog()" class="btn btn-primary">✨ Analyze Fog</button>
+                <div id="ai-loading" style="display:none; margin-top: 24px; color: var(--rogue-orange); font-weight: 800;">Illuminating constraints...</div>
+                <div id="ai-result" style="margin-top: 30px; display:none; padding: 30px; background: rgba(255,255,255,0.05); border-left: 4px solid var(--rogue-orange);">
+                    <p id="ai-result-text" style="color: white; line-height: 1.8;"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing CTA (Tight) -->
+    <section class="section-dark" id="contact" style="text-align: center; padding-top: 60px; padding-bottom: 120px;">
+        <div class="container reveal">
+            <h2 style="font-size: clamp(3.5rem, 10vw, 6.5rem); margin-bottom: 16px;">More Force <span class="text-orange">≠</span> More Growth</h2>
+            <p style="font-size: 1.75rem; margin-bottom: 48px; color: white;">Do you KNOW where your next $1–3M will come from?</p>
+            <a href="#" class="btn btn-primary" style="padding: 24px 72px; font-size: 1.2rem;">Start the Conversation</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            &copy; 2026 Rogue Marketing. Strategic Growth for $5M–$50M B2B Enterprises.
+        </div>
+    </footer>
+
+    <script>
+        const apiKey = ""; 
+
+        async function callGemini(prompt) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: "You are a senior revenue strategist. Analyze the growth plateau. Be direct, authoritative, and concise. Max 120 words." }] }
+            };
+            try {
+                const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text;
+                }
+            } catch (e) { console.error(e); }
+            return "Revenue engine diagnostic interrupted.";
+        }
+
+        async function analyzeFog() {
+            const input = document.getElementById('ai-input-fog').value;
+            if (!input) return;
+            const loading = document.getElementById('ai-loading');
+            const resultDiv = document.getElementById('ai-result');
+            const resultText = document.getElementById('ai-result-text');
+            loading.style.display = 'block';
+            resultDiv.style.display = 'none';
+            const resp = await callGemini(input);
+            resultText.innerText = resp;
+            loading.style.display = 'none';
+            resultDiv.style.display = 'block';
+        }
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            window.scrollY > 50 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
